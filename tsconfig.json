@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "outDir": "tsDist",
+    "module": "es6",
+    "target": "es6",
+    "jsx": "react",
+    "alwaysStrict": true,
+    "moduleResolution": "node"
+  },
+  "include": [
+    "./src/**/*"
+  ]
+}

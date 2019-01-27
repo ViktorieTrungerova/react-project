@@ -1,0 +1,17 @@
+log/*
+temp/*
+vendor/*
+node_modules/*
+.idea
+www/assets/css/*.css
+www/assets/css/*.css.map
+www/assets/js/script.min.js
+www/assets/js/script.min.*.js
+www/assets/js/app.js
+www/assets/js/vendor.js
+www/assets/assets.json
+deployment-*.*
+!.gitignore
+!.htaccess
+!web.config
+!.gitkeep
