@@ -3,8 +3,6 @@ import {CartTable, ICartItem} from "./cartTable";
 import {CartForm} from "./cartForm";
 import {Button, Modal} from "react-bootstrap";
 import PNotify from "pnotify/dist/es/PNotify";
-import PNotifyButtons from "pnotify/dist/es/PNotifyButtons";
-import PNotifyConfirm from "pnotify/dist/es/PNotifyConfirm";
 
 interface ICartState {
     title: string,
@@ -49,13 +47,13 @@ export class Cart extends React.Component<{}, ICartState> {
         )
     }
 
-    handleChangeCount = (item: ICartItem, count:number) => {
+    handleChangeCount = (item: ICartItem, count: number) => {
         this.state.items.map( (stateItem: ICartItem, index, array) => {
             if (item.id === stateItem.id) {
                 array[index].count = count;
             }
         });
-        
+
         this.setState({
             cartForm: {
                 edit: {
@@ -63,6 +61,28 @@ export class Cart extends React.Component<{}, ICartState> {
                 }
             }
         })
+    };
+
+    handleClickRemove = (item: ICartItem) => {
+        this.state.items.map((stateItem: ICartItem, index, array) => {
+            if (item.id === stateItem.id) {
+                array.splice(index, 1);
+            }
+
+            this.setState(this.state);
+        });
+
+        PNotify.success({
+            text: "Polozka byla odebrana",
+            type: 'notice',
+            stack: {
+                "dir1": "up",
+                "dir2": "left",
+                "firstpos1": 50,
+                "firstpos2": 25
+            }
+        });
+
     };
 
     handleClickEdit = (item: ICartItem) => {
@@ -75,18 +95,9 @@ export class Cart extends React.Component<{}, ICartState> {
         });
     };
 
-    handleClickRemove = (item: ICartItem) => {
-
-        PNotify.alert({
-            text: "Polozka byla odebrana",
-            type: 'notice'
-        });
-
-    };
-
     getData(){
         return {
-            title: 'Kosik',
+            title: 'Košík',
             cartForm: {
                 edit: {
                     item: null,
@@ -94,8 +105,8 @@ export class Cart extends React.Component<{}, ICartState> {
             },
             items: [
                 { id: 1, name: 'Jablko', price: 600, count: 27},
-                { id: 2, name: 'Hruska', price: 100, count: 26},
-                { id: 3, name: 'Banan', price: 300, count: 29},
+                { id: 2, name: 'Hruška', price: 100, count: 26},
+                { id: 3, name: 'Banán', price: 300, count: 29},
                 { id: 4, name: 'Mandarinka', price: 700, count: 28},
                 { id: 5, name: 'Batata', price: 800, count: 25},
                 { id: 6, name: 'Cibule', price: 500, count: 256},

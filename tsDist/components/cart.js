@@ -20,6 +20,24 @@ export class Cart extends React.Component {
                 }
             });
         };
+        this.handleClickRemove = (item) => {
+            this.state.items.map((stateItem, index, array) => {
+                if (item.id === stateItem.id) {
+                    array.splice(index, 1);
+                }
+                this.setState(this.state);
+            });
+            PNotify.success({
+                text: "Polozka byla odebrana",
+                type: 'notice',
+                stack: {
+                    "dir1": "up",
+                    "dir2": "left",
+                    "firstpos1": 50,
+                    "firstpos2": 25
+                }
+            });
+        };
         this.handleClickEdit = (item) => {
             this.setState({
                 cartForm: {
@@ -27,12 +45,6 @@ export class Cart extends React.Component {
                         item: item,
                     }
                 }
-            });
-        };
-        this.handleClickRemove = (item) => {
-            PNotify.alert({
-                text: "Polozka byla odebrana",
-                type: 'notice'
             });
         };
         this.state = this.getData();
@@ -50,7 +62,7 @@ export class Cart extends React.Component {
     }
     getData() {
         return {
-            title: 'Kosik',
+            title: 'Košík',
             cartForm: {
                 edit: {
                     item: null,
@@ -58,8 +70,8 @@ export class Cart extends React.Component {
             },
             items: [
                 { id: 1, name: 'Jablko', price: 600, count: 27 },
-                { id: 2, name: 'Hruska', price: 100, count: 26 },
-                { id: 3, name: 'Banan', price: 300, count: 29 },
+                { id: 2, name: 'Hruška', price: 100, count: 26 },
+                { id: 3, name: 'Banán', price: 300, count: 29 },
                 { id: 4, name: 'Mandarinka', price: 700, count: 28 },
                 { id: 5, name: 'Batata', price: 800, count: 25 },
                 { id: 6, name: 'Cibule', price: 500, count: 256 },

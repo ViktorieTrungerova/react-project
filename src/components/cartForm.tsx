@@ -7,7 +7,6 @@ import {Confirm} from 'react-confirm-bootstrap';
 interface IFormProps {
     item: ICartItem,
     onChangeCount (item: ICartItem, count: number): void,
-
 }
 
 export class CartForm extends React.Component<IFormProps, {}> {
