@@ -23,7 +23,7 @@ export class CartForm extends React.Component<IFormProps, {}> {
             <Form onSubmit={this.handleChangeCount}>
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Počet kusů</Form.Label>
-                    <Form.Control name="count" type="number" defaultValue={this.props.item.count.toString()} />
+                    <Form.Control name="count" type="number" min={1} defaultValue={this.props.item.count.toString()} />
                     <Button className={'margin-top margin-right'} type="submit" variant="primary">Změna množství</Button>
                 </Form.Group>
             </Form>
