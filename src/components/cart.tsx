@@ -82,7 +82,7 @@ export class Cart extends React.Component<{}, ICartState> {
         });
 
         PNotify.success({
-            text: "Polozka byla odebrana",
+            text: "Položka byla odebrána",
             type: 'notice',
             stack: {
                 "dir1": "up",
