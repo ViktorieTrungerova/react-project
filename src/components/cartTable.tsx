@@ -31,21 +31,29 @@ export class CartTable extends React.Component<ITableProps, {}> {
                 <div>
                     <h2>{this.props.title}</h2>
                     <table className="table">
+                        <tr>
+                            <th></th>
+                            <th>Název položky</th>
+                            <th>Cena v Kč</th>
+                            <th>Počet kusů</th>
+                            <th>Cena celkem v Kč</th>
+                            <th></th>
+                        </tr>
                         {this.props.items.map( (item: ICartItem) => {
                             return(
                                 <tr>
                                     <td>{item.id}</td>
                                     <td>{item.name}</td>
-                                    <td data-tip="Cena">{item.price}</td>
-                                    <td data-tip="Počet kusů">{item.count}</td>
-                                    <td data-tip="Cena celkem">{item.count * item.price}</td>
+                                    <td>{item.price}</td>
+                                    <td>{item.count}</td>
+                                    <td>{item.count * item.price}</td>
                                     <td>
-                                        <Button variant="primary" onClick={(e) => this.props.handleClickEdit(item)}>
+                                        <Button className={'margin-right'} data-tip="Editovat" variant="primary" onClick={(e) => this.props.handleClickEdit(item)}>
                                             <div>
                                                 <FontAwesomeIcon icon="pencil-alt" />
                                             </div>
                                         </Button>
-                                        <Button variant="danger" onClick={(e) => this.props.handleClickRemove(item)}>
+                                        <Button data-tip="Smazat" variant="danger" onClick={(e) => this.props.handleClickRemove(item)}>
                                             <div>
                                                 <FontAwesomeIcon icon="trash-alt" />
                                             </div>

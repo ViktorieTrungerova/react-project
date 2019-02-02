@@ -1,7 +1,7 @@
 import * as React from "react";
 import {CartTable, ICartItem} from "./cartTable";
 import {CartForm} from "./cartForm";
-import {Button, Modal} from "react-bootstrap";
+import {Modal} from "react-bootstrap";
 import PNotify from "pnotify/dist/es/PNotify";
 
 interface ICartState {
@@ -33,19 +33,28 @@ export class Cart extends React.Component<{}, ICartState> {
                 />
 
                 {this.state.cartForm.edit.item !== null &&
-                    <Modal show={true}>
-                        <Modal.Header>
-                            <Modal.Title>Modal heading</Modal.Title>
+                    <Modal show={true} onHide={this.handleClose}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Změna počtu kusů</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                             <CartForm item={this.state.cartForm.edit.item} onChangeCount={this.handleChangeCount}/>
                         </Modal.Body>
                     </Modal>
                 }
-
             </div>
         )
     }
+
+    handleClose = () => {
+        this.setState({
+            cartForm: {
+                edit: {
+                    item: null,
+                }
+            }
+        })
+    };
 
     handleChangeCount = (item: ICartItem, count: number) => {
         this.state.items.map( (stateItem: ICartItem, index, array) => {
