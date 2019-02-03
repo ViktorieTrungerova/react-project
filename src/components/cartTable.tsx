@@ -12,8 +12,9 @@ library.add(faPencilAlt, faTrashAlt);
 interface ITableProps {
     title: string;
     items: Array<ICartItem>;
-    handleClickEdit(item: ICartItem): void;
-    handleClickRemove(item: ICartItem): void;
+    showEdit?: boolean;
+    handleClickEdit?(item: ICartItem): void;
+    handleClickRemove?(item: ICartItem): void;
 }
 
 export interface ICartItem {
@@ -47,6 +48,7 @@ export class CartTable extends React.Component<ITableProps, {}> {
                                     <td>{item.price}</td>
                                     <td>{item.count}</td>
                                     <td>{item.count * item.price}</td>
+                                    {this.props.showEdit !== false &&
                                     <td>
                                         <Button className={'margin-right'} data-tip="Editovat" variant="primary" onClick={(e) => this.props.handleClickEdit(item)}>
                                             <div>
@@ -59,6 +61,7 @@ export class CartTable extends React.Component<ITableProps, {}> {
                                             </div>
                                         </Button>
                                     </td>
+                                    }
                                 </tr>
                             );
                         })}

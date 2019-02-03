@@ -8,6 +8,8 @@ module.exports = {
     mode: "development",
     entry: {
         cart: "./src/entry/cart.tsx",
+        deliveryForm: "./src/entry/deliveryForm.tsx",
+        previewCart: "./src/entry/previewCart.tsx",
     },
     output: {
         filename: "[name].js",
