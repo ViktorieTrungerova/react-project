@@ -3,6 +3,11 @@ import {CartTable, ICartItem} from "./cartTable";
 import {CartForm} from "./cartForm";
 import {Modal} from "react-bootstrap";
 import PNotify from "pnotify/dist/es/PNotify";
+import {Navigation} from "./navigation";
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 interface ICartState {
     title: string,
@@ -22,15 +27,23 @@ export class Cart extends React.Component<{}, ICartState> {
     }
 
     render(){
-        console.log(typeof this.state.cartForm);
 
         return(
             <div>
+                <Navigation step={1}/>
                 <CartTable title={this.state.title}
+                    showEdit={true}
                     items={this.state.items}
                     handleClickEdit={this.handleClickEdit}
                     handleClickRemove={this.handleClickRemove}
                 />
+                <Container>
+                    <Row>
+                        <Col className={'text-align-r margin-top'}>
+                            <Button  className="primary" href="http://localhost/react-project/www/delivery.html">Pokračovat</Button>
+                        </Col>
+                    </Row>
+                </Container>
 
                 {this.state.cartForm.edit.item !== null &&
                     <Modal show={true} onHide={this.handleClose}>
@@ -113,12 +126,12 @@ export class Cart extends React.Component<{}, ICartState> {
                 },
             },
             items: [
-                { id: 1, name: 'Jablko', price: 600, count: 27},
-                { id: 2, name: 'Hruška', price: 100, count: 26},
-                { id: 3, name: 'Banán', price: 300, count: 29},
-                { id: 4, name: 'Mandarinka', price: 700, count: 28},
-                { id: 5, name: 'Batata', price: 800, count: 25},
-                { id: 6, name: 'Cibule', price: 500, count: 256},
+                { id: 1, name: 'Jablko', price: 600, count: 27, unit: 'Ks'},
+                { id: 2, name: 'Hruška', price: 100, count: 26, unit: 'Kg'},
+                { id: 3, name: 'Banán', price: 300, count: 29, unit: 'Ks'},
+                { id: 4, name: 'Mandarinka', price: 700, count: 28, unit: 'Kg'},
+                { id: 5, name: 'Batata', price: 800, count: 25, unit: 'Ks'},
+                { id: 6, name: 'Cibule', price: 500, count: 256, unit: 'Kg'},
             ],
         }
     }

@@ -5,3 +5,46 @@
 .margin-top {
     margin-top: .5rem;
 }
+
+.margin-bottom {
+    margin-bottom: 1rem;
+}
+
+.navigation {
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+.text-align-r {
+    text-align: right;
+}
+.text-align-l {
+    text-align: left;
+}
+
+.navigation .cart-step {
+    padding: 1rem 1rem;
+    text-align: center;
+    background-color: lightskyblue;
+    color: black;
+    border: 2px solid deepskyblue;
+}
+
+.navigation .cart-step:hover {
+    transition: 1s all;
+    background-color: deepskyblue;
+}
+
+.navigation a {
+    color: black;
+}
+
+.navigation a:hover {
+    text-decoration: none;
+}
+
+.navigation .cart-step.active {
+    background-color: deepskyblue;
+    color: black;
+}
+

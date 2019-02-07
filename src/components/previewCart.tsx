@@ -1,15 +1,12 @@
 import * as React from "react";
-import {CartTable} from "./cartTable";
+import {CartTable, ICartItem} from "./cartTable";
 import {PreviewAddress} from "./previewAdress";
 import {IBillingAddress, ICartContact, IDeliveryAddress} from "./deliveryForm";
 import {Navigation} from "./navigation";
-
-interface ICartItem {
-    id: number;
-    name: string;
-    count: number;
-    price: number;
-}
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import {Button} from "react-bootstrap";
+import Container from "react-bootstrap/Container";
 
 
 interface IPreviewCartState {
@@ -19,9 +16,7 @@ interface IPreviewCartState {
     contact: ICartContact,
 }
 
-
 export class PreviewCart extends React.Component< {}, IPreviewCartState> {
-
     constructor(props, context) {
         super(props, context);
         this.state = {
@@ -49,35 +44,50 @@ export class PreviewCart extends React.Component< {}, IPreviewCartState> {
                 phone: '739 123 456',
                 email: 'v.trungerova@seznam.cz',
             },
-             items: [
-            { id: 1, name: 'Jablko', price: 600, count: 27},
-            { id: 2, name: 'Hruška', price: 100, count: 26},
-            { id: 3, name: 'Banán', price: 300, count: 29},
-            { id: 4, name: 'Mandarinka', price: 700, count: 28},
-            { id: 5, name: 'Batata', price: 800, count: 25},
-            { id: 6, name: 'Cibule', price: 500, count: 256},
-        ]
+            items: [
+                { id: 1, name: 'Jablko', price: 600, count: 27, unit: 'Ks'},
+                { id: 2, name: 'Hruška', price: 100, count: 26, unit: 'Kg'},
+                { id: 3, name: 'Banán', price: 300, count: 29, unit: 'Ks'},
+                { id: 4, name: 'Mandarinka', price: 700, count: 28, unit: 'Kg'},
+                { id: 5, name: 'Batata', price: 800, count: 25, unit: 'Ks'},
+                { id: 6, name: 'Cibule', price: 500, count: 256, unit: 'Kg'},
+        ],
         };
     }
 
     render() {
         if (this.state === null) return;
-             return (<div>
-                <Navigation step={3}/>
-                    <div>
-                        <h2>Položky objednávky</h2>
-                        <CartTable
-                            title={"omg"}
-                            showEdit={false}
-                            items={this.state.items}/>
-                        <div className={"margin-top"}/>
-                        <PreviewAddress
-                            deliveryAddress={this.state.deliveryAddress}
-                            billingAddress={this.state.billingAddress}
-                            contact={this.state.contact}
-                        />
+             return (
+                 <div>
+                    <Navigation step={3}/>
+                        <div>
+                            <CartTable
+                                showEdit={false}
+                                items={this.state.items} title={'Položky objednávky'}/>
+                            <div className={"margin-top"}/>
+                            <PreviewAddress
+                                deliveryAddress={this.state.deliveryAddress}
+                                billingAddress={this.state.billingAddress}
+                                contact={this.state.contact}/>
+                        </div>
+                         <Container>
+                             <Row>
+                                 <Col className={'text-align-l margin-bottom'}>
+                                     <Button href="http://localhost/react-project/www/delivery.html">Zpět</Button>
+                                 </Col>
+                                 <Col className={'margin-bottom text-align-r'}>
+                                     <Button onClick={this.handleSendCart}>
+                                         Objednat
+                                     </Button>
+                                 </Col>
+                             </Row>
+                         </Container>
                     </div>
-            </div>
         );
+
     }
+
+    handleSendCart = () => {
+        alert("Objednávka byla odeslána");
+    };
 }

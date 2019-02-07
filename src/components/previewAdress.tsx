@@ -1,5 +1,10 @@
 import * as React from "react";
 import {IBillingAddress, ICartContact, IDeliveryAddress} from "./deliveryForm";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import {Button, Form} from "react-bootstrap";
+import {types} from "util";
 
 interface IPreviewAddressProps {
     deliveryAddress: IDeliveryAddress,
@@ -10,97 +15,96 @@ interface IPreviewAddressProps {
 export class PreviewAddress extends React.Component< IPreviewAddressProps, {}> {
     render() {
         return (
-            <div>
-
-                <div className={"row"}>
-                    <div className={"col-md-6"}>
+            <Container>
+                <Row className={"margin-bottom"}>
+                    <Col md="6">
                         <h2>Fakturační adresa</h2>
                         <table className="table">
 
                             <tbody>
                             <tr>
-                                <td className={"text-left"}>Jméno a příjmení</td>
-                                <td className={"text-left"}>{this.props.billingAddress.name} {this.props.billingAddress.lastname}</td>
+                                <td>Jméno a příjmení</td>
+                                <td>{this.props.billingAddress.name} {this.props.billingAddress.lastname}</td>
                             </tr>
                             <tr>
-                                <td className={"text-left"}>Společnost</td>
-                                <td className={"text-left"}>{this.props.billingAddress.company}</td>
+                                <td>Společnost</td>
+                                <td>{this.props.billingAddress.company}</td>
                             </tr>
                             <tr>
-                                <td className={"text-left"}>IČ</td>
-                                <td className={"text-left"}>{this.props.billingAddress.ic}</td>
+                                <td>IČ</td>
+                                <td>{this.props.billingAddress.ic}</td>
                             </tr>
                             <tr>
-                                <td className={"text-left"}>DIČ</td>
-                                <td className={"text-left"}>{this.props.billingAddress.dic}</td>
+                                <td>DIČ</td>
+                                <td>{this.props.billingAddress.dic}</td>
                             </tr>
                             <tr>
-                                <td className={"text-left"}>Město</td>
-                                <td className={"text-left"}>{this.props.billingAddress.city}</td>
+                                <td>Město</td>
+                                <td>{this.props.billingAddress.city}</td>
                             </tr>
                             <tr>
-                                <td className={"text-left"}>Ulice</td>
-                                <td className={"text-left"}>{this.props.billingAddress.street}</td>
+                                <td>Ulice</td>
+                                <td>{this.props.billingAddress.street}</td>
                             </tr>
                             <tr>
-                                <td className={"text-left"}>PSČ</td>
-                                <td className={"text-left"}>{this.props.billingAddress.zip}</td>
+                                <td>PSČ</td>
+                                <td>{this.props.billingAddress.zip}</td>
                             </tr>
                             </tbody>
                         </table>
-                    </div>
-                    <div className={"col-md-6"}>
+                    </Col>
+                    <Col md="6" className={"margin-bottom"}>
                         <h2>Doručovací adresa</h2>
                         <table className="table">
                             <tbody>
                             <tr>
-                                <td className={"text-left"}>Jméno a příjmení</td>
-                                <td className={"text-left"}>{this.props.deliveryAddress.name} {this.props.deliveryAddress.lastname}</td>
+                                <td>Jméno a příjmení</td>
+                                <td>{this.props.deliveryAddress.name} {this.props.deliveryAddress.lastname}</td>
                             </tr>
                             <tr>
-                                <td className={"text-left"}>Společnost</td>
-                                <td className={"text-left"}>{this.props.deliveryAddress.company}</td>
+                                <td>Společnost</td>
+                                <td>{this.props.deliveryAddress.company}</td>
                             </tr>
                             <tr>
-                                <td className={"text-left"}>IČ</td>
-                                <td className={"text-left"}>{this.props.deliveryAddress.ic}</td>
+                                <td>IČ</td>
+                                <td>{this.props.deliveryAddress.ic}</td>
                             </tr>
                             <tr>
-                                <td className={"text-left"}>DIČ</td>
-                                <td className={"text-left"}>{this.props.deliveryAddress.dic}</td>
+                                <td>DIČ</td>
+                                <td>{this.props.deliveryAddress.dic}</td>
                             </tr>
                             <tr>
-                                <td className={"text-left"}>Město</td>
-                                <td className={"text-left"}>{this.props.deliveryAddress.city}</td>
+                                <td>Město</td>
+                                <td>{this.props.deliveryAddress.city}</td>
                             </tr>
                             <tr>
-                                <td className={"text-left"}>Ulice</td>
-                                <td className={"text-left"}>{this.props.deliveryAddress.street}</td>
+                                <td>Ulice</td>
+                                <td>{this.props.deliveryAddress.street}</td>
                             </tr>
                             <tr>
-                                <td className={"text-left"}>PSČ</td>
-                                <td className={"text-left"}>{this.props.deliveryAddress.zip}</td>
+                                <td>PSČ</td>
+                                <td>{this.props.deliveryAddress.zip}</td>
                             </tr>
                             </tbody>
                         </table>
-                    </div>
-                    <div className={"col-xs-12"}>
+                    </Col>
+                    <Col className={"margin-bottom"}>
                         <h2>Kontakt</h2>
                         <table className={"table"}>
                             <tbody>
                             <tr>
-                                <td className={"text-left"}>Email</td>
-                                <td className={"text-left"}>{this.props.contact.email}</td>
+                                <td>Email</td>
+                                <td>{this.props.contact.email}</td>
                             </tr>
                             <tr>
-                                <td className={"text-left"}>Telefon</td>
-                                <td className={"text-left"}>{this.props.contact.phone}</td>
+                                <td>Telefon</td>
+                                <td>{this.props.contact.phone}</td>
                             </tr>
                             </tbody>
                         </table>
-                    </div>
-                </div>
-            </div>
+                    </Col>
+                </Row>
+            </Container>
         );
     }
 }

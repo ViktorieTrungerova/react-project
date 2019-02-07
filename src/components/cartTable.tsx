@@ -2,6 +2,7 @@ import * as React from "react";
 import {Button} from "react-bootstrap";
 import ReactTooltip from 'react-tooltip'
 import { Container, Row, Col } from 'reactstrap';
+import NumberFormat from 'react-number-format';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPencilAlt, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
@@ -12,7 +13,7 @@ library.add(faPencilAlt, faTrashAlt);
 interface ITableProps {
     title: string;
     items: Array<ICartItem>;
-    showEdit?: boolean;
+    showEdit: boolean;
     handleClickEdit?(item: ICartItem): void;
     handleClickRemove?(item: ICartItem): void;
 }
@@ -22,10 +23,12 @@ export interface ICartItem {
     name: string,
     price: number,
     count: number,
+    unit: string,
 
 }
 
 export class CartTable extends React.Component<ITableProps, {}> {
+
     render(){
         return(
             <Container>
@@ -33,22 +36,22 @@ export class CartTable extends React.Component<ITableProps, {}> {
                     <h2>{this.props.title}</h2>
                     <table className="table">
                         <tr>
-                            <th></th>
                             <th>Název položky</th>
-                            <th>Cena v Kč</th>
-                            <th>Počet kusů</th>
-                            <th>Cena celkem v Kč</th>
+                            <th>Cena</th>
+                            <th>Počet</th>
+                            <th>Cena celkem</th>
+                            {this.props.showEdit &&
                             <th></th>
+                            }
                         </tr>
                         {this.props.items.map( (item: ICartItem) => {
                             return(
                                 <tr>
-                                    <td>{item.id}</td>
                                     <td>{item.name}</td>
-                                    <td>{item.price}</td>
-                                    <td>{item.count}</td>
-                                    <td>{item.count * item.price}</td>
-                                    {this.props.showEdit !== false &&
+                                    <td><NumberFormat value={item.price} displayType={'text'} thousandSeparator={true} suffix={' Kč'} /></td>
+                                    <td>{item.count} {item.unit}</td>
+                                    <td><NumberFormat value={item.count * item.price} displayType={'text'} thousandSeparator={true} suffix={' Kč'} /></td>
+                                    {this.props.showEdit &&
                                     <td>
                                         <Button className={'margin-right'} data-tip="Editovat" variant="primary" onClick={(e) => this.props.handleClickEdit(item)}>
                                             <div>

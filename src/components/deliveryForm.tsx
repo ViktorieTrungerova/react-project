@@ -1,10 +1,23 @@
 import * as React from "react";
-import {Form, Button, FormGroup, FormControl} from "react-bootstrap";
+import {Form, Button, FormGroup, FormControl, Container} from "react-bootstrap";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
-interface IAddressProps {
+// interface IAddressProps {
+//     deliveryAddress: IDeliveryAddress,
+//     billingAddress: IBillingAddress,
+//     contact: ICartContact
+//     onSubmit (billingAddress:IBillingAddress, deliveryAddress: IDeliveryAddress, contact: ICartContact):void,
+//
+// }
+
+interface IDeliveryFormProps {
     deliveryAddress: IDeliveryAddress,
     billingAddress: IBillingAddress,
-    onSubmit (billingAddress:IBillingAddress, deliveryAddress: IDeliveryAddress, contact: ICartContact): void,
+    contact: ICartContact
+    onSubmit(billingAddress:IBillingAddress, deliveryAddress: IDeliveryAddress, contact: ICartContact):void,
+    onChange(isSame: boolean): void;
+    isDeliverySameBilling: boolean;
 }
 
 export interface IDeliveryAddress {
@@ -34,7 +47,13 @@ export interface ICartContact {
     email: string;
 }
 
-export class DeliveryForm extends React.Component<IAddressProps, {}> {
+
+export class DeliveryForm extends React.Component<IDeliveryFormProps, {}> {
+
+    handleOnChange= (e) => {
+       const isSame = (e.target.checked);
+       this.props.onChange(isSame);
+    };
 
     handleSubmit= (e) => {
         e.preventDefault();
@@ -71,156 +90,196 @@ export class DeliveryForm extends React.Component<IAddressProps, {}> {
 
     render() {
         return (
-                <Form onSubmit={this.handleSubmit}
-                    //validateAll={this._validateForm}
-                    >
+            <Container>
+                <Form onSubmit={this.handleSubmit}>
                     <fieldset>
                         <legend>Fakturační adresa</legend>
-                        <div className='row'>
-                            <div className="col-xs-4">
+                        <Row>
+                            <Col>
                                 <FormGroup controlId="formName">
                                     <Form.Label>Jméno</Form.Label>
-                                    <FormControl name={'billingFirstname'} type="text"/>
+                                    <FormControl name={'billingFirstname'}
+                                                 defaultValue= {this.props.billingAddress.name}
+                                                 type="text"/>
                                 </FormGroup>
-                            </div>
-
-                            <div className="col-xs-4">
-                                <FormGroup controlId="formLastname">
-                                    <Form.Label>Město</Form.Label>
-                                    <FormControl name={'billingLastname'} type="text"/>
-                                </FormGroup>
-                            </div>
-                        </div>
-                        <div className='row'>
-                            <div className="col-xs-4">
-                                <FormGroup controlId="formCompany">
-                                    <Form.Label>Společnost</Form.Label>
-                                    <FormControl name={'billingCompany'} type="text"/>
-                                </FormGroup>
-                            </div>
-                            <div className="col-xs-4">
-                                <FormGroup controlId="formIC">
-                                    <Form.Label>IČ</Form.Label>
-                                    <FormControl name={'billingIC'} type="number"/>
-                                </FormGroup>
-                            </div>
-
-                            <div className="col-xs-4">
-                                <FormGroup controlId="formDIC">
-                                    <Form.Label>DIČ</Form.Label>
-                                    <FormControl name={'billingDIC'} type="number"/>
-                                </FormGroup>
-                            </div>
-                        </div>
-                        <div className='row'>
-                            <div className="col-xs-4">
-                                <FormGroup controlId="formCity">
-                                    <Form.Label>Město</Form.Label>
-                                    <FormControl name={'billingCity'}/>
-                                </FormGroup>
-                            </div>
-
-                            <div className="col-xs-4">
-                                <FormGroup controlId="formStreet">
-                                    <Form.Label>Ulice</Form.Label>
-                                    <FormControl name={'billingStreet'} type="text"/>
-                                </FormGroup>
-                            </div>
-
-                            <div className="col-xs-4">
-                                <FormGroup controlId="formZip">
-                                    <Form.Label>PSČ</Form.Label>
-                                    <FormControl name={'billingZip'} type="number"/>
-                                </FormGroup>
-                            </div>
-                        </div>
-                        <div className='row'>
-                            <div className="col-xs-4">
-                                <FormGroup controlId="formPhone">
-                                    <Form.Label>Telefon</Form.Label>
-                                    <FormControl name={'billingPhone'} type="number"/>
-                                </FormGroup>
-                            </div>
-
-                            <div className="col-xs-4">
-                                <FormGroup controlId="formEmail">
-                                    <Form.Label>Email</Form.Label>
-                                    <FormControl name={'billingEmail'} type="text"/>
-                                </FormGroup>
-                            </div>
-                            <div className="col-xs-12">
-                                <FormGroup>
-                                    <Form.Check type="checkbox" label="Doručovací adresa je stejná fakturační"/>
-                                </FormGroup>
-                            </div>
-                        </div>
-                    </fieldset>
-                    <fieldset>
-                        <legend>Doručovací adresa</legend>
-                        <div className='row'>
-                            <div className="col-xs-4">
-                                <FormGroup controlId="formName">
-                                    <Form.Label>Jméno</Form.Label>
-                                    <FormControl name={'deliveryFirstname'} type="text"/>
-                                </FormGroup>
-                            </div>
-
-                            <div className="col-xs-4">
+                            </Col>
+                            <Col>
                                 <FormGroup controlId="formLastname">
                                     <Form.Label>Příjmení</Form.Label>
-                                    <FormControl name={'deliveryLastname'} type="text"/>
+                                    <FormControl name={'billingLastname'}
+                                                 defaultValue= {this.props.billingAddress.lastname}
+                                                 type="text"/>
                                 </FormGroup>
-                            </div>
-
-                            <div className="col-xs-4">
-                            <FormGroup controlId="formCompany">
-                                <Form.Label>Společnost</Form.Label>
-                                <FormControl name={'deliveryCompany'} type="text"/>
-                            </FormGroup>
-                            </div>
-                        </div>
-                        <div className='row'>
-                            <div className="col-xs-4">
-                                <FormGroup controlId="formCity">
-                                    <Form.Label>Město</Form.Label>
-                                    <FormControl name={'deliveryCity'}/>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col className="col-xs-4">
+                                <FormGroup controlId="formCompany">
+                                    <Form.Label>Společnost</Form.Label>
+                                    <FormControl name={'billingCompany'}
+                                                 defaultValue= {this.props.billingAddress.company}
+                                                 type="text"/>
                                 </FormGroup>
-                            </div>
-
-                            <div className="col-xs-4">
-                                <FormGroup controlId="formStreet">
-                                    <Form.Label>Ulice</Form.Label>
-                                    <FormControl name={'deliveryStreet'} type="text"/>
-                                </FormGroup>
-                            </div>
-
-                            <div className="col-xs-4">
-                                <FormGroup controlId="formZip">
-                                    <Form.Label>PSČ</Form.Label>
-                                    <FormControl name={'deliveryZip'} type="number"/>
-                                </FormGroup>
-                            </div>
-                        </div>
-                        <div className='row'>
-                            <div className="col-xs-4">
+                            </Col>
+                            <Col className="col-xs-4">
                                 <FormGroup controlId="formIC">
                                     <Form.Label>IČ</Form.Label>
-                                    <FormControl name={'deliveryIC'} type="number"/>
+                                    <FormControl name={'billingIC'}
+                                                 defaultValue= {this.props.billingAddress.ic}
+                                                 type="text"/>
                                 </FormGroup>
-                            </div>
-
-                            <div className="col-xs-4">
+                            </Col>
+                            <Col className="col-xs-4">
                                 <FormGroup controlId="formDIC">
                                     <Form.Label>DIČ</Form.Label>
-                                    <FormControl name={'deliveryDIC'} type="number"/>
+                                    <FormControl name={'billingDIC'}
+                                                 defaultValue= {this.props.billingAddress.dic}
+                                                 type="text"/>
                                 </FormGroup>
-                            </div>
-                        </div>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <FormGroup controlId="formCity">
+                                    <Form.Label>Město</Form.Label>
+                                    <FormControl name={'billingCity'}
+                                                 defaultValue= {this.props.billingAddress.city}/>
+                                </FormGroup>
+                            </Col>
+
+                            <Col>
+                                <FormGroup controlId="formStreet">
+                                    <Form.Label>Ulice</Form.Label>
+                                    <FormControl name={'billingStreet'} type="text"
+                                                 defaultValue= {this.props.billingAddress.street}/>
+                                </FormGroup>
+                            </Col>
+
+                            <Col>
+                                <FormGroup controlId="formZip">
+                                    <Form.Label>PSČ</Form.Label>
+                                    <FormControl name={'billingZip'}
+                                                 defaultValue= {this.props.billingAddress.zip}
+                                                 type="number"/>
+                                </FormGroup>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <FormGroup controlId="formPhone">
+                                    <Form.Label>Telefon</Form.Label>
+                                    <FormControl name={'billingPhone'}
+                                                 defaultValue={this.props.contact.phone}
+                                                 type="text"/>
+                                </FormGroup>
+                            </Col>
+                            <Col>
+                                <FormGroup controlId="formEmail">
+                                    <Form.Label>Email</Form.Label>
+                                    <FormControl name={'billingEmail'}
+                                                 defaultValue={this.props.contact.email}
+                                                 type="text"/>
+                                </FormGroup>
+                            </Col>
+                            <Col sm="12">
+                                        <Form.Check
+                                            onChange={this.handleOnChange}
+                                            name={'checkbox'}
+                                            type={'checkbox'}
+                                            defaultChecked={this.props.isDeliverySameBilling}
+                                            label={'stejne adresy'} />
+                            </Col>
+                        </Row>
                     </fieldset>
-                    <Button type="submit">
-                        Uložit
-                    </Button>
+                    {this.props.isDeliverySameBilling &&
+                    <fieldset>
+                        <legend>Doručovací adresa</legend>
+                        <Row>
+                            <Col>
+                                <FormGroup controlId="formName">
+                                    <Form.Label>Jméno</Form.Label>
+                                    <FormControl name={'deliveryFirstname'}
+                                                 defaultValue= {this.props.deliveryAddress.name}
+                                                 type="text"/>
+                                </FormGroup>
+                            </Col>
+
+                            <Col>
+                                <FormGroup controlId="formLastname">
+                                    <Form.Label>Příjmení</Form.Label>
+                                    <FormControl name={'deliveryLastname'}
+                                                 defaultValue= {this.props.deliveryAddress.lastname}
+                                                 type="text"/>
+                                </FormGroup>
+                            </Col>
+
+                            <Col>
+                                <FormGroup controlId="formCompany">
+                                    <Form.Label>Společnost</Form.Label>
+                                    <FormControl name={'deliveryCompany'}
+                                                 defaultValue= {this.props.deliveryAddress.company}
+                                                 type="text"/>
+                                </FormGroup>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <FormGroup controlId="formCity">
+                                    <Form.Label>Město</Form.Label>
+                                    <FormControl name={'deliveryCity'}
+                                                 defaultValue= {this.props.deliveryAddress.city}/>
+                                </FormGroup>
+                            </Col>
+
+                            <Col>
+                                <FormGroup controlId="formStreet">
+                                    <Form.Label>Ulice</Form.Label>
+                                    <FormControl name={'deliveryStreet'}
+                                                 defaultValue= {this.props.deliveryAddress.street}
+                                                 type="text"/>
+                                </FormGroup>
+                            </Col>
+
+                            <Col>
+                                <FormGroup controlId="formZip">
+                                    <Form.Label>PSČ</Form.Label>
+                                    <FormControl name={'deliveryZip'}
+                                                 defaultValue= {this.props.deliveryAddress.zip}
+                                                 type="number"/>
+                                </FormGroup>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <FormGroup controlId="formIC">
+                                    <Form.Label>IČ</Form.Label>
+                                    <FormControl name={'deliveryIC'}
+                                                 defaultValue= {this.props.deliveryAddress.ic}
+                                                 type="text"/>
+                                </FormGroup>
+                            </Col>
+
+                            <Col>
+                                <FormGroup controlId="formDIC">
+                                    <Form.Label>DIČ</Form.Label>
+                                    <FormControl name={'deliveryDIC'}
+                                                 defaultValue= {this.props.deliveryAddress.dic}
+                                                 type="text"/>
+                                </FormGroup>
+                            </Col>
+                        </Row>
+                    </fieldset>
+                    }
+                    <Row>
+                        <Col>
+                            <Button type="submit">
+                                Uložit
+                            </Button>
+                        </Col>
+                    </Row>
                 </Form>
+            </Container>
+
         );
     }
 }
