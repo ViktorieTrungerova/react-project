@@ -28,6 +28,9 @@ export interface ICartItem {
 }
 
 export class CartTable extends React.Component<ITableProps, {}> {
+    constructor(props, context) {
+        super(props, context);
+    }
 
     render(){
         return(

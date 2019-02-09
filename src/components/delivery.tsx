@@ -1,16 +1,14 @@
 import * as React from "react";
 import {DeliveryForm, IBillingAddress, ICartContact, IDeliveryAddress} from "./deliveryForm";
 import {Navigation} from "./navigation"
-import Button from "react-bootstrap/Button";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import {Col, Row, Container, Button } from "react-bootstrap";
 
 interface IDeliveryState {
     deliveryAddress: IDeliveryAddress,
     billingAddress: IBillingAddress,
     contact: ICartContact,
     isDeliverySameBilling: boolean;
+    showModal: boolean,
 
 }
 
@@ -44,6 +42,7 @@ export class Delivery extends React.Component<{}, IDeliveryState> {
                     email: 'v.trungerova@seznam.cz',
                 },
                 isDeliverySameBilling: false,
+                showModal: false,
             };
     }
 
@@ -70,6 +69,7 @@ export class Delivery extends React.Component<{}, IDeliveryState> {
                         </Col>
                     </Row>
                 </Container>
+
             </div>
 
         );

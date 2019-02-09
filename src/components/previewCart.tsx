@@ -5,8 +5,7 @@ import {IBillingAddress, ICartContact, IDeliveryAddress} from "./deliveryForm";
 import {Navigation} from "./navigation";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import {Button} from "react-bootstrap";
-import Container from "react-bootstrap/Container";
+import {Form, Button, Container} from "react-bootstrap";
 
 
 interface IPreviewCartState {
@@ -14,6 +13,7 @@ interface IPreviewCartState {
     deliveryAddress: IDeliveryAddress,
     billingAddress: IBillingAddress,
     contact: ICartContact,
+    isChecked: boolean,
 }
 
 export class PreviewCart extends React.Component< {}, IPreviewCartState> {
@@ -52,6 +52,7 @@ export class PreviewCart extends React.Component< {}, IPreviewCartState> {
                 { id: 5, name: 'Batata', price: 800, count: 25, unit: 'Ks'},
                 { id: 6, name: 'Cibule', price: 500, count: 256, unit: 'Kg'},
         ],
+            isChecked: false,
         };
     }
 
@@ -72,11 +73,23 @@ export class PreviewCart extends React.Component< {}, IPreviewCartState> {
                         </div>
                          <Container>
                              <Row>
+                                 <Col sm='12' className={'margin-bottom'}>
+                                     <Form.Check
+                                         name={'checkbox'}
+                                         type={'checkbox'}
+                                         defaultChecked={this.state.isChecked}
+                                         label={'Souhlasím s podmínkami'}
+                                         onChange={this.handleOnChangeChecked}
+                                     />
+                                 </Col>
                                  <Col className={'text-align-l margin-bottom'}>
                                      <Button href="http://localhost/react-project/www/delivery.html">Zpět</Button>
                                  </Col>
                                  <Col className={'margin-bottom text-align-r'}>
-                                     <Button onClick={this.handleSendCart}>
+                                     <Button
+                                         onClick={this.handleSendCart}
+                                         disabled={!this.state.isChecked}
+                                     >
                                          Objednat
                                      </Button>
                                  </Col>
@@ -86,8 +99,14 @@ export class PreviewCart extends React.Component< {}, IPreviewCartState> {
         );
 
     }
+    handleOnChangeChecked= (e) => {
+        const isChecked = (e.target.checked);
+        this.setState({
+            isChecked: isChecked,
+        });
+    };
 
     handleSendCart = () => {
-        alert("Objednávka byla odeslána");
+            alert("Objednávka byla odeslána");
     };
 }

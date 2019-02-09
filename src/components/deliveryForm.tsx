@@ -187,7 +187,7 @@ export class DeliveryForm extends React.Component<IDeliveryFormProps, {}> {
                                             name={'checkbox'}
                                             type={'checkbox'}
                                             defaultChecked={this.props.isDeliverySameBilling}
-                                            label={'stejne adresy'} />
+                                            label={'Fakturační adresa stejná jak doručovací'} />
                             </Col>
                         </Row>
                     </fieldset>
